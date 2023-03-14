@@ -1,0 +1,441 @@
+openapi: 3.0.0
+x-stoplight:
+  id: py3hzgktidg61
+info:
+  title: social-media
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /users:
+    post:
+      summary: Create New User
+      operationId: post-user
+      responses:
+        '200':
+          description: User Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    x-stoplight:
+                      id: owqqh5r3m52bi
+                  name:
+                    type: string
+                    x-stoplight:
+                      id: l6n8flosh09r1
+                  email:
+                    type: string
+                    x-stoplight:
+                      id: e0e17i8hx5kib
+                  phone:
+                    type: string
+                    x-stoplight:
+                      id: f51b3mywjilr4
+                  dayOfBirth:
+                    type: string
+                    x-stoplight:
+                      id: 4l5y6hnvwee0m
+                  gender:
+                    type: string
+                    x-stoplight:
+                      id: a6ixnfuqgitxd
+        '400':
+          description: Missing Required Information
+        '500':
+          description: Email Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            examples:
+              Create User Bob Fellow:
+                value:
+                  firstName: Bob
+                  lastName: Fellow
+                  email: bob.fellow@gmail.com
+                  dateOfBirth: '1996-08-24'
+        description: Post the necessary fields for the API to create a new user.
+      description: Create a new user.
+    get:
+      summary: ''
+      operationId: get-user
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    x-stoplight:
+                      id: 871il2m8evgl9
+                  name:
+                    type: string
+                    x-stoplight:
+                      id: vos4slpar8hqf
+                  email:
+                    type: string
+                    x-stoplight:
+                      id: 9c7hhbv9pvbo2
+                  phone:
+                    type: string
+                    x-stoplight:
+                      id: t0y0r8udxwdcb
+                  gender:
+                    type: string
+                    x-stoplight:
+                      id: zzxo3eorsz0sz
+                  dayOfBirth:
+                    type: string
+                    x-stoplight:
+                      id: wkalkbb99osjt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    parameters: []
+  '/users/{user_id}':
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+    get:
+      summary: Get User Info by User ID
+      tags: []
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    x-stoplight:
+                      id: lcyhsnqm0kd0i
+                  name:
+                    type: string
+                    x-stoplight:
+                      id: mme6x281hpwrg
+                  email:
+                    type: string
+                    x-stoplight:
+                      id: 2o3cn0hdmak1o
+                  phone:
+                    type: string
+                    x-stoplight:
+                      id: fkq510rttus86
+                  gender:
+                    type: string
+                    x-stoplight:
+                      id: xhdqbuwxn4djh
+                  dayOfBirth:
+                    type: string
+                    x-stoplight:
+                      id: onuxof2s6s7xo
+        '404':
+          description: User Not Found
+      operationId: get-users-userId
+      description: Retrieve the information of the user with the matching user ID.
+    put:
+      summary: ''
+      operationId: put-users-userId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      summary: ''
+      operationId: delete-users-userId
+      responses:
+        '204':
+          description: No Content
+  /posts:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+      operationId: get-posts
+    post:
+      summary: ''
+      operationId: post-posts
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  x-stoplight:
+                    id: 8du5glmubzmeg
+                content:
+                  type: string
+                  x-stoplight:
+                    id: 6etg90r6ly339
+  '/posts/{post_id}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: post_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+      operationId: get-posts-postId-comments
+    post:
+      summary: ''
+      operationId: post-posts-postId-comments
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  x-stoplight:
+                    id: knwwnxl1ge6ao
+                content:
+                  type: string
+                  x-stoplight:
+                    id: an18mi79dh1zc
+  '/post/{post_id}/comments/{comments_id}':
+    parameters:
+      - schema:
+          type: string
+        name: post_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: comments_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+      operationId: get-post-post_id-comments-comments_id
+    put:
+      summary: ''
+      operationId: put-post-post_id-comments-comments_id
+      responses:
+        '204':
+          description: No Content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newContent:
+                  type: string
+                  x-stoplight:
+                    id: uhe9q1emtacc7
+    delete:
+      summary: ''
+      operationId: delete-post-post_id-comments-comments_id
+      responses:
+        '200':
+          description: OK
+  /auth/login:
+    post:
+      summary: ''
+      operationId: post-auth-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  x-stoplight:
+                    id: ar9fxqg0mzikw
+                password:
+                  type: string
+                  x-stoplight:
+                    id: 3ey2k6odqrkqi
+                  format: password
+  /auth/register:
+    post:
+      summary: ''
+      operationId: post-auth-register
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    x-stoplight:
+                      id: ia2dzy5ycnhq0
+                  email:
+                    type: string
+                    x-stoplight:
+                      id: vgci2guxhyhe1
+                  id:
+                    type: string
+                    x-stoplight:
+                      id: ozt8y0sk48mhz
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      x-examples:
+        Alice Smith:
+          id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        name:
+          type: string
+          x-stoplight:
+            id: yxeshs66ayreg
+        email:
+          type: string
+          x-stoplight:
+            id: plrwqzdsa5pz9
+          format: email
+        phone:
+          type: string
+          x-stoplight:
+            id: b5iql53m6n8qk
+          minLength: 10
+          maxLength: 11
+        gender:
+          type: string
+          x-stoplight:
+            id: lnx88opqg9j6b
+        dayOfBirth:
+          type: string
+          x-stoplight:
+            id: iwuo32yd5c1xk
+          format: date
+        password:
+          type: string
+          x-stoplight:
+            id: 147szb0kaj4tx
+          format: password
+      required:
+        - id
+        - name
+        - email
+        - phone
+        - gender
+        - dayOfBirth
+        - password
+    Post:
+      title: Post
+      x-stoplight:
+        id: fjflw5l052frb
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+          x-stoplight:
+            id: 8c11qh6pffkx4
+        title:
+          type: string
+          x-stoplight:
+            id: q5uujcbhfwlm9
+        content:
+          type: string
+          x-stoplight:
+            id: ah1awowmsysfo
+      required:
+        - id
+        - userId
+    Comment:
+      title: Comments
+      x-stoplight:
+        id: oxzlwoqpjye2z
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+          x-stoplight:
+            id: epqnwq8szkuku
+        postId:
+          type: string
+          x-stoplight:
+            id: b29828w5l50dl
+        content:
+          type: string
+          x-stoplight:
+            id: myf1h10brutqx
+      required:
+        - id
+        - userId
+        - postId
+        - content
